@@ -1,1 +1,111 @@
 
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Live Studio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #10131b;
+      color: #fff;
+    }
+    header {
+      padding: 22px 18px;
+      background: #191e2b;
+      border-bottom: 1px solid #343b4c;
+    }
+    h1 { margin: 0; font-size: 25px; }
+    header p { color: #bbc4d6; margin-bottom: 0; }
+    main { max-width: 650px; margin: auto; padding: 18px; }
+    .panel {
+      background: #1a2030;
+      border: 1px solid #343b4c;
+      padding: 18px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+    }
+    h2 { font-size: 19px; margin-top: 0; }
+    button, input {
+      width: 100%;
+      padding: 13px;
+      margin-top: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      border: 0;
+      background: #2869e8;
+      color: white;
+      font-weight: bold;
+    }
+    input {
+      background: #10131b;
+      border: 1px solid #454e63;
+      color: white;
+    }
+    .note { color: #b8c2d6; font-size: 14px; line-height: 1.6; }
+    #status { color: #ffd479; line-height: 1.6; }
+    a { color: #8eb5ff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📡 My Live Studio</h1>
+    <p>आपका YouTube Live Dashboard</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>🎬 1. अपनी वीडियो चुनें</h2>
+      <input id="videoFile" type="file" accept="video/*">
+      <p class="note">यहाँ वीडियो चुनकर अपने फोन पर उसका प्रीव्यू देख सकते हैं। वीडियो सर्वर पर अपलोड नहीं होती।</p>
+      <video id="preview" controls playsinline
+        style="width:100%;display:none;border-radius:8px"></video>
+    </section>
+
+    <section class="panel">
+      <h2>▶️ 2. YouTube Studio</h2>
+      <p class="note">अपने चैनल में लाइव स्ट्रीम बनाने और उसकी स्थिति देखने के लिए YouTube Studio खोलें।</p>
+      <button onclick="window.open('https://studio.youtube.com/channel/UC/livestreaming','_blank')">
+        YouTube Live खोलें
+      </button>
+    </section>
+
+    <section class="panel">
+      <h2>🔁 3. 24×7 ऑटोमेटिक लाइव</h2>
+      <p id="status">स्थिति: अभी स्ट्रीमिंग सर्वर कनेक्ट नहीं है।</p>
+      <p class="note">यह डैशबोर्ड अभी लाइव स्ट्रीम शुरू नहीं करता। इसके लिए अलग स्ट्रीमिंग सर्वर और सुरक्षित YouTube API कनेक्शन चाहिए।</p>
+    </section>
+
+    <section class="panel">
+      <h2>💰 4. मोनेटाइजेशन</h2>
+      <p class="note">लाइव से कमाई की पात्रता और विज्ञापन की स्थिति अपने YouTube Studio के Earn और Live Control Room सेक्शन में जाँचें।</p>
+      <button onclick="window.open('https://studio.youtube.com/','_blank')">
+        YouTube Studio खोलें
+      </button>
+    </section>
+
+    <p class="note">My Live Studio • व्यक्तिगत उपयोग के लिए</p>
+  </main>
+
+  <script>
+    const input = document.getElementById('videoFile');
+    const preview = document.getElementById('preview');
+    let currentVideoUrl = '';
+
+    input.addEventListener('change', function () {
+      if (currentVideoUrl) URL.revokeObjectURL(currentVideoUrl);
+      const file = this.files && this.files[0];
+      if (!file) return;
+      currentVideoUrl = URL.createObjectURL(file);
+      preview.src = currentVideoUrl;
+      preview.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
