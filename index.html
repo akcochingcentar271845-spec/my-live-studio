@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Live Studio</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -89,11 +90,10 @@
         YouTube Studio खोलें
       </button>
     </section>
-
-    <p class="note">My Live Studio • व्यक्तिगत उपयोग के लिए</p>
+  <p class="note">My Live Studio • व्यक्तिगत उपयोग के लिए</p>
+<div id="buttonDiv"></div>
   </main>
-
-  <script>
+<script>
     const input = document.getElementById('videoFile');
     const preview = document.getElementById('preview');
     let currentVideoUrl = '';
@@ -106,6 +106,20 @@
       preview.src = currentVideoUrl;
       preview.style.display = 'block';
     });
+    window.onload = function () {
+    google.accounts.id.initialize({
+        client_id: "763795674899-8c63vx3tv752bj98p35fgvcj4vodfgk67j33.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "large" }
+    );
+};
+function handleCredentialResponse(response) {
+    console.log("Token received");
+    alert("लॉगिन सफल रहा!");
+}
   </script>
 </body>
 </html>
